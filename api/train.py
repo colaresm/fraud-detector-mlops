@@ -4,6 +4,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import classification_report, accuracy_score
+import mlflow
+
+
+# Integration with MLflow
+mlflow.set_tracking_uri("http://localhost:5000/")
+mlflow.set_experiment(experimentd_id=393939393) # insert experiment id
 
 # 1. Generate synthetic data
 np.random.seed(42)
@@ -58,10 +64,15 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # 9. Train MLP model
-mlp = MLPClassifier(hidden_layer_sizes=(20), max_iter=400)
-mlp.fit(X_train_scaled, y_train)
+with mlflow.start_run():
+    mlflow.sklearn.autolog()
+    mlp = MLPClassifier(hidden_layer_sizes=(20), max_iter=400)
+    mlp.fit(X_train_scaled, y_train)
 
-# 10. Evaluate model
-y_pred = mlp.predict(X_test_scaled)
+    # 10. Evaluate model
+    y_pred = mlp.predict(X_test_scaled)
 
-print("Accuracy:", accuracy_score(y_test, y_pred))
+    acc_test  = accuracy_score(y_test, y_pred)
+    
+    mlflow.log_metrics({"acc_test":acc_test})
+    

@@ -5,7 +5,7 @@ docker run -p 5000:5000 mlflow-server
 docker run -p 5000:5000 mlflow/mlflow
 ```
 
-# Dataset Sintético de Risco de Empréstimo
+# Dataset 
 
 Este dataset foi gerado sinteticamente para simular um cenário de classificação de risco de empréstimo. A variável alvo (`risco_emprestimo`) possui três categorias: `baixo`, `moderado` e `alto`.
 
