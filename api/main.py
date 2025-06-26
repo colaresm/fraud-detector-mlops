@@ -1,6 +1,11 @@
-import mlflow
+from flask import Flask
+from routes.routes import main
 
-# Configura o URI do servidor MLflow
-mlflow.set_tracking_uri("http://localhost:5000")
+app = Flask(__name__)
+app.register_blueprint(main)
 
-mlflow.set_experiment("fraud-detection")
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+
+
+
