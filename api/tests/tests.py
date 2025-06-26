@@ -6,10 +6,10 @@ class TestSoma(unittest.TestCase):
         self.assertEqual(app.soma(2, 3), 5)
 
     def test_soma_negativa(self):
-        self.assertIsInstance(app.soma(-1, -1), (int, float))
+        self.assertEqual(app.soma(-1, -1), -2)
     
     def test_is_number(self):
-        self.isIN
+        self.assertIsInstance(app.soma(-1, -1), (int, float))
 
 if __name__ == '__main__':
     unittest.main()
