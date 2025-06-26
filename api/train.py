@@ -9,7 +9,7 @@ import mlflow
 
 # Integration with MLflow
 mlflow.set_tracking_uri("http://localhost:5000/")
-mlflow.set_experiment(experimentd_id=393939393) # insert experiment id
+mlflow.set_experiment(experiment_id=522610720329323041) # insert experiment id
 
 # 1. Generate synthetic data
 np.random.seed(42)
