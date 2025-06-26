@@ -1,6 +1,5 @@
 import unittest
-from ..services import app
-
+from api.services import app
 
 class TestSoma(unittest.TestCase):
     def test_soma_positiva(self):
