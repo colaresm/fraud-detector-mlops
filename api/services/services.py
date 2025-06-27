@@ -2,9 +2,8 @@ import mlflow
 import numpy as np
 from api.utils import utils
 
-def get_risk(data):
-    run_id = ""
-    
+def get_risk(data,run_id=None):
+ 
     try:
         scaler = mlflow.sklearn.load_model(f"runs:/{run_id}/scaler_model")
         mlp = mlflow.sklearn.load_model(f"runs:/{run_id}/model")
