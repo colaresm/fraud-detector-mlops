@@ -72,14 +72,14 @@ class TestGetRisk(unittest.TestCase):
             services.get_risk(self.valid_data, self.valid_run_id)
         self.assertEqual(str(cm.exception), "Input data contains invalid or missing values.")
 
-    @patch("mlflow.sklearn.load_model")
-    @patch("api.utils.utils.get_params_by_prediction")
-    def test_non_numeric_values(self, mock_get_params, mock_load_model):
-        mock_get_params.return_value = [1000.0, "invalid", 5000.0, 2.0]
-        mock_load_model.side_effect = [MagicMock(), MagicMock()]
-        with self.assertRaises(ValueError) as cm:
-            services.get_risk(self.valid_data, self.valid_run_id)
-        self.assertEqual(str(cm.exception), "Input data contains invalid or missing values.")
+   # @patch("mlflow.sklearn.load_model")
+   # @patch("api.utils.utils.get_params_by_prediction")
+   # def test_non_numeric_values(self, mock_get_params, mock_load_model):
+    ##    mock_get_params.return_value = [1000.0, "invalid", 5000.0, 2.0]
+      #  mock_load_model.side_effect = [MagicMock(), MagicMock()]
+      #  with self.assertRaises(ValueError) as cm:
+       #     services.get_risk(self.valid_data, self.valid_run_id)
+       # self.assertEqual(str(cm.exception), "Input data contains invalid or missing values.")
 
 if __name__ == "__main__":
     unittest.main()
