@@ -35,7 +35,7 @@ class TestGetRisk(unittest.TestCase):
         mock_mlp.predict.return_value = self.prediction
         mock_load_model.side_effect = [mock_scaler, mock_mlp]
 
-        result = app.get_risk(self.valid_data, self.valid_run_id)
+        result = services.get_risk(self.valid_data, self.valid_run_id)
 
         self.assertEqual(result, self.prediction[0])
         mock_get_params.assert_called_once_with(self.valid_data)
