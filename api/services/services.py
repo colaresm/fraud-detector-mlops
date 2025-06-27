@@ -14,9 +14,9 @@ def get_risk(data,run_id=None):
     except Exception as e:
         raise ValueError(f"Error extracting parameters: {str(e)}") 
     
-    params = [monthly_income, credit_score, current_debt, late_payments]
-    if any(x is None or not np.isfinite(x) for x in params):
-        raise ValueError("Input data contains invalid or missing values.")
+  #  params = [monthly_income, credit_score, current_debt, late_payments]
+   # if any(x is None or not np.isfinite(x) for x in params):
+    #    raise ValueError("Input data contains invalid or missing values.")
     
     X = np.array([[monthly_income, credit_score, current_debt, late_payments]])
     X_scaled = scaler.transform(X)
