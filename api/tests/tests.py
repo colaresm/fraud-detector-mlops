@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from unittest.mock import patch, MagicMock
 from api.utils import utils
-from api.services import get_risk ,app 
+from api.services import app ,services
 
 class TestSoma(unittest.TestCase):
     def test_soma_positiva(self):
@@ -35,7 +35,7 @@ class TestGetRisk(unittest.TestCase):
         mock_mlp.predict.return_value = self.prediction
         mock_load_model.side_effect = [mock_scaler, mock_mlp]
 
-        result = get_risk(self.valid_data, self.valid_run_id)
+        result = app.get_risk(self.valid_data, self.valid_run_id)
 
         self.assertEqual(result, self.prediction[0])
         mock_get_params.assert_called_once_with(self.valid_data)
@@ -46,21 +46,21 @@ class TestGetRisk(unittest.TestCase):
 
     def test_missing_run_id(self):
         with self.assertRaises(ValueError) as cm:
-            get_risk(self.valid_data, run_id=None)
+            services.get_risk(self.valid_data, run_id=None)
         self.assertEqual(str(cm.exception), "The run_id must be provided.")
 
     @patch("mlflow.sklearn.load_model")
     def test_model_load_failure(self, mock_load_model):
         mock_load_model.side_effect = Exception("MLflow connection error")
         with self.assertRaises(RuntimeError) as cm:
-            get_risk(self.valid_data, self.valid_run_id)
+            services.get_risk(self.valid_data, self.valid_run_id)
         self.assertTrue("Error loading models from MLflow" in str(cm.exception))
 
     @patch("api.utils.utils.get_params_by_prediction")
     def test_invalid_params(self, mock_get_params):
         mock_get_params.side_effect = Exception("Invalid data format")
         with self.assertRaises(ValueError) as cm:
-            get_risk(self.valid_data, self.valid_run_id)
+           services. get_risk(self.valid_data, self.valid_run_id)
         self.assertTrue("Error extracting parameters" in str(cm.exception))
 
     @patch("mlflow.sklearn.load_model")
@@ -69,7 +69,7 @@ class TestGetRisk(unittest.TestCase):
         mock_get_params.return_value = [1000.0, None, 5000.0, 2.0]
         mock_load_model.side_effect = [MagicMock(), MagicMock()]
         with self.assertRaises(ValueError) as cm:
-            get_risk(self.valid_data, self.valid_run_id)
+            services.get_risk(self.valid_data, self.valid_run_id)
         self.assertEqual(str(cm.exception), "Input data contains invalid or missing values.")
 
     @patch("mlflow.sklearn.load_model")
@@ -78,7 +78,7 @@ class TestGetRisk(unittest.TestCase):
         mock_get_params.return_value = [1000.0, "invalid", 5000.0, 2.0]
         mock_load_model.side_effect = [MagicMock(), MagicMock()]
         with self.assertRaises(ValueError) as cm:
-            get_risk(self.valid_data, self.valid_run_id)
+            services.get_risk(self.valid_data, self.valid_run_id)
         self.assertEqual(str(cm.exception), "Input data contains invalid or missing values.")
 
 if __name__ == "__main__":
