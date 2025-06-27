@@ -63,16 +63,17 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# 9. Train MLP model
+# Start experiment on MLflow
 with mlflow.start_run():
     mlflow.sklearn.autolog()
-    mlp = MLPClassifier(hidden_layer_sizes=(20), max_iter=400)
+
+    mlp = MLPClassifier(hidden_layer_sizes=(20), max_iter=400, random_state=42)
     mlp.fit(X_train_scaled, y_train)
 
-    # 10. Evaluate model
     y_pred = mlp.predict(X_test_scaled)
+    acc_test = accuracy_score(y_test, y_pred)
+    mlflow.log_metrics({"acc_test": acc_test})
 
-    acc_test  = accuracy_score(y_test, y_pred)
+    mlflow.sklearn.log_model(scaler, "scaler_model")
     
-    mlflow.log_metrics({"acc_test":acc_test})
     
