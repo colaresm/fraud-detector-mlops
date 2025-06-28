@@ -12,7 +12,6 @@ scaler_model = mlflow.sklearn.load_model(f"models:/scaler_risk/{version}")
 
 def get_risk(data):
     X = [[utils.get_params_by_prediction(data)]]
-    
     X_scaled = scaler_model.transform(X)
     prediction = model.predict(X_scaled)
     return prediction
