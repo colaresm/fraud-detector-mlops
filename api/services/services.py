@@ -1,25 +1,31 @@
 import mlflow
 import numpy as np
-from api.utils import utils
+from utils import utils
 
-def get_risk(data,run_id=None):
- 
-    try:
-        scaler = mlflow.sklearn.load_model(f"runs:/{run_id}/scaler_model")
-        mlp = mlflow.sklearn.load_model(f"runs:/{run_id}/model")
-    except Exception as e:
-        raise RuntimeError(f"Error loading models from MLflow: {str(e)}")
-    try:
-        monthly_income, credit_score, current_debt, late_payments = utils.get_params_by_prediction(data)
-    except Exception as e:
-        raise ValueError(f"Error extracting parameters: {str(e)}") 
+import mlflow.sklearn
+
+# Configuração e carregamento uma única vez
+mlflow.set_tracking_uri("http://localhost:5000")
+RUN_ID = "2814d72943704714a6609abcb99fa951"
+
+client = mlflow.client.MlflowClient()
+version = max([int(i.version) for i in client.get_latest_versions("risk_model")])
+
+# %%
+model = mlflow.sklearn.load_model(f"models:/risk_model/{version}")
+scaler_model = mlflow.sklearn.load_model(f"models:/scaler_risk/{version}")
+
+
+def get_risk(data):
+
+    X_novo = [[
+        data["monthly_income"],
+        data["credit_score"],
+        data["current_debt"],
+        data["late_payments"]
+    ]]
     
-  #  params = [monthly_income, credit_score, current_debt, late_payments]
-   # if any(x is None or not np.isfinite(x) for x in params):
-    #    raise ValueError("Input data contains invalid or missing values.")
-    
-    X = np.array([[monthly_income, credit_score, current_debt, late_payments]])
-    X_scaled = scaler.transform(X)
-    prediction = mlp.predict(X_scaled)
-    
-    return prediction[0]
+    X_novo_scaled = scaler_model.transform(X_novo)
+    prediction = model.predict(X_novo_scaled)
+    print(prediction)
+    return int(3)  # Retorna 0, 1 ou 2 (por exemplo)

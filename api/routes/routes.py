@@ -1,10 +1,9 @@
 from flask import Blueprint, jsonify,request
-from api.services import services
-
+from services import services
 
 main = Blueprint('main', __name__)
 
-@main.route('/predict')
+@main.route('/predict',methods=['POST'])
 def predict():
     if not request.is_json:
         return jsonify({'error': 'Request must be JSON'}), 400
