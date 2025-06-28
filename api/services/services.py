@@ -1,7 +1,7 @@
 from api.utils import utils
 from api.infra import mlflow_server
 from api.infra import mlflow_server
-from utils import utils
+from api.utils import utils
 from mlflow.exceptions import MlflowException
 
 def get_risk(data):
@@ -12,6 +12,5 @@ def get_risk(data):
         prediction = model.predict(X_scaled)
         return prediction
     except (MlflowException, ConnectionError, Exception) as e:
-        # Logar o erro se quiser
         print(f"[WARN] Falha ao carregar modelo do MLflow: {e}")
         return [0, 0, 0]
