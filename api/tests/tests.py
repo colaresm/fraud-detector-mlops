@@ -1,8 +1,7 @@
 import unittest
 import numpy as np
 from unittest.mock import patch, MagicMock
-from api.services import app
-from services import get_risk
+from api.services import services,app
 
 class TestSoma(unittest.TestCase):
     def test_soma_positiva(self):
@@ -36,7 +35,7 @@ class TestGetRisk(unittest.TestCase):
             "late_payments": 2
         }
 
-        result = get_risk(input_data)
+        result = services.get_risk(input_data)
 
         mock_get_params.assert_called_once_with(input_data)
         mock_scaler.transform.assert_called_once_with([[mock_get_params.return_value]])
