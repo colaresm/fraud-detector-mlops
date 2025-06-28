@@ -15,8 +15,8 @@ class TestSoma(unittest.TestCase):
 
 
 class TestGetRisk(unittest.TestCase):
-    @patch('api.services.load_model_and_scaler')
-    @patch('api.utils.get_params_by_prediction')
+    @patch('api.services.services.load_model_and_scaler')
+    @patch('api.services.services.get_params_by_prediction')
     def test_get_risk_returns_expected_prediction(self, mock_get_params, mock_load_model_and_scaler):
         mock_get_params.return_value = [5000, 700, 1000, 2]
 
