@@ -1,6 +1,6 @@
 import mlflow
 import numpy as np
-from utils import utils
+from api.utils import utils
 import mlflow.sklearn
 
 mlflow.set_tracking_uri("http://localhost:5000")
