@@ -7,11 +7,9 @@ main = Blueprint('main', __name__)
 def predict():
     if not request.is_json:
         return jsonify({'error': 'Request must be JSON'}), 400
-
+    
     data = request.get_json()
-
     risk = services.get_risk(data)
-
     return jsonify({'risk':risk,}), 200
 
 @main.route('/healthy')
