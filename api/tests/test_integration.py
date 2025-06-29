@@ -25,7 +25,7 @@ def test_predict_endpoint(client):
     }
 
     response = client.post('/predict', json=payload)
-    
+    print(response)
     assert response.status_code == 200
     json_data = response.get_json()
     assert 'prediction' in json_data
