@@ -1,10 +1,18 @@
 import pytest
-from flask import Flask
+from flask import Flask,request,jsonify
+from api.services import services
 
 @pytest.fixture
 def client():
     app = Flask(__name__)
     app.config['TESTING'] = True
+
+    @app.route('/predict', methods=['POST'])
+
+    def predict_route():
+        data = request.get_json()
+        result = services.get_risk(data)
+        return jsonify({"prediction": result})
     with app.test_client() as client:
         yield client
 
@@ -21,4 +29,4 @@ def test_predict_endpoint(client):
     assert response.status_code == 200
     json_data = response.get_json()
     assert 'prediction' in json_data
-    assert isinstance(json_data['prediction'], (str, int, float))  # depende do retorno do modelo
+    assert isinstance(json_data['prediction'], (str, int, float)) 
