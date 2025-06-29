@@ -1,5 +1,5 @@
-from utils import utils
-from infra import mlflow_server
+from api.utils import utils
+from api.infra import mlflow_server
 import numpy as np
 
 def get_risk(data):    
