@@ -13,8 +13,10 @@ def client():
     @app.route('/predict', methods=['POST'])
     def predict_route():
         data = request.get_json()
-        result = get_risk(data)
-        return jsonify({"prediction":int(result)})
+        response = get_risk(data)
+        prediction, proba = response[0], response[1]
+        proba_max = float(np.max(proba))
+        return  jsonify({'prediction': int(prediction), 'proba_max': proba_max})
     with app.test_client() as client:
         yield client
 
@@ -27,8 +29,11 @@ def test_predict_endpoint(client):
     }
 
     response = client.post('/predict', json=payload)
-    print(response)
     assert response.status_code == 200
+
     json_data = response.get_json()
+    
     assert 'prediction' in json_data
-    assert isinstance(json_data['prediction'], (str, int, float)) 
+    assert 'proba_max' in json_data
+    assert isinstance(json_data['prediction'], int)
+    assert isinstance(json_data['proba_max'], float)

@@ -7,5 +7,6 @@ def get_risk(data):
     X = np.array([utils.get_params_by_prediction(data)])
     X_scaled = scaler_model.transform(X)
     prediction = model.predict(X_scaled)
-    return prediction
+    proba = model.predict_proba(X_scaled)
+    return prediction,proba
 
