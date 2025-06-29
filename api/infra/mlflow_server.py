@@ -1,7 +1,7 @@
 import mlflow.sklearn
 import os
 
-def load_local_model_and_scaler(models_dir: str = "models"):
+def load_model_and_scaler(models_dir: str = "models"):
     model_path = os.path.join(models_dir, "model")
     scaler_path = os.path.join(models_dir, "scaler_model")
 
