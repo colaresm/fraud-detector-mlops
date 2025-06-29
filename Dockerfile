@@ -18,6 +18,7 @@ COPY --from=builder /app/requirements.txt .
 
 RUN pip install --no-cache /wheels/*
 
+COPY main.py .
 COPY api/ .
 
 EXPOSE 3000
