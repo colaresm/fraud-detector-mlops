@@ -1,30 +1,16 @@
-import mlflow
 import mlflow.sklearn
-from mlflow.tracking import MlflowClient
+import os
 
+def load_local_model_and_scaler(models_dir: str = "models"):
+    model_path = os.path.join(models_dir, "model")
+    scaler_path = os.path.join(models_dir, "scaler_model")
 
-def load_model_and_scaler(model_name="risk_model", scaler_name="scaler_risk", tracking_uri="http://localhost:5000"):
-    mlflow.set_tracking_uri(tracking_uri)
-    client = mlflow.client.MlflowClient()
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model not found at {model_path}")
+    if not os.path.exists(scaler_path):
+        raise FileNotFoundError(f"Scaler not found at {scaler_path}")
     
-    version = max([int(i.version) for i in client.get_latest_versions(model_name)])
-    
-    model = mlflow.sklearn.load_model(f"models:/{model_name}/{version}")
-    scaler = mlflow.sklearn.load_model(f"models:/{scaler_name}/{version}")
+    model = mlflow.sklearn.load_model(model_path)
+    scaler = mlflow.sklearn.load_model(scaler_path)
     
     return model, scaler
-
-def is_mlflow_online(tracking_uri="http://localhost:5000"):
-    try:
-        mlflow.set_tracking_uri(tracking_uri)
-        client = MlflowClient()
-        client.search_experiments()
-        return True
-    except Exception as e:
-        print(f"Erro ao conectar ao MLflow: {e}")
-        return False
-
-if is_mlflow_online("http://localhost:5000"):
-    print("MLflow está online.")
-else:
-    print("MLflow está offline ou inacessível.")
