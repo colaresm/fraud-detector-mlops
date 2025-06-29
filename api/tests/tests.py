@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from unittest.mock import patch, MagicMock
 from api.services import app
-from services import get_risk
+from api.services import get_risk
 
 class TestSoma(unittest.TestCase):
     def test_soma_positiva(self):
