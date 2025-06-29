@@ -3,7 +3,7 @@ from flask import Flask,request,jsonify
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from api.services.services import get_risk
+from api.services.services import get_prediction
 import numpy as np
 
 @pytest.fixture
@@ -14,7 +14,7 @@ def client():
     @app.route('/predict', methods=['POST'])
     def predict_route():
         data = request.get_json()
-        response = get_risk(data)
+        response = get_prediction(data)
         prediction, proba = response[0], response[1]
         proba_max = float(np.max(proba))
         return  jsonify({'prediction': int(prediction), 'proba_max': proba_max})

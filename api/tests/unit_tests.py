@@ -4,22 +4,12 @@ from api.services import services
 import unittest
 from unittest.mock import patch, MagicMock
 
-class TestSoma(unittest.TestCase):
-    def test_soma_positiva(self):
-        self.assertEqual(app.soma(2, 3), 5)
-
-    def test_soma_negativa(self):
-        self.assertEqual(app.soma(-1, -1), -2)
-    
-    def test_is_number(self):
-        self.assertIsInstance(app.soma(-1, -1), (int, float))
-
 
 class TestGetRisk(unittest.TestCase):
 
     @patch('api.infra.mlflow_server.load_model_and_scaler')
     @patch('api.utils.utils.get_params_by_prediction')
-    def test_get_risk_returns_expected_prediction(self, mock_get_params, mock_load_model_and_scaler):
+    def test_get_prediction(self, mock_get_params, mock_load_model_and_scaler):
         mock_model = MagicMock()
         mock_scaler = MagicMock()
 
