@@ -25,4 +25,4 @@ jobs:
           python -m unittest discover -s api/tests
 
       - name: Rodar testes de integração
-        run: pytest tests/integration_tests.py
+        run: pytest api/tests/integration_tests.py
