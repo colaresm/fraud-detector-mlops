@@ -23,3 +23,6 @@ jobs:
       - name: Rodar testes com unittest
         run: |
           python -m unittest discover -s api/tests
+
+      - name: Rodar testes de integração
+        run: pytest tests/

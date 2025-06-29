@@ -1,2 +1,4 @@
 mlflow
 Flask
+pytest
+pytest-cov
