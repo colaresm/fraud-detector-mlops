@@ -28,4 +28,4 @@ jobs:
         run: PYTHONPATH=. pytest
       
       - name: Rodar testes de integração
-        run: pytest api/tests/integration_tests.py
+        run: pytest api/tests/test_integration.py
