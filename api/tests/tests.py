@@ -19,16 +19,17 @@ class TestGetRisk(unittest.TestCase):
     @patch('api.infra.mlflow_server')
     @patch('api.services.services.mlflow_server.is_mlflow_online')
     @patch('api.utils.utils')
-    def test_get_risk_returns_expected_prediction(self, mock_get_params, mock_load_model_and_scaler):
-        mock_get_params.return_value = [5000, 700, 1000, 2]
-
+    def test_get_risk_returns_expected_prediction(self, mock_get_params, mock_is_online, mock_load_model_and_scaler):
+        mock_is_online.return_value = True
+        mock_get_params.return_value = [1.0, 2.0, 3.0,4.5]  # ou o vetor esperado
         mock_scaler = MagicMock()
-        mock_scaler.transform.return_value = [[0.5, 0.7, 0.4, 0.1]]
-
         mock_model = MagicMock()
-        mock_model.predict.return_value = [2]
+        
+        mock_scaler.transform.return_value = [[0.1, 0.2, 0.3,0.3]]
+        mock_model.predict.return_value = [0.9]
 
         mock_load_model_and_scaler.return_value = (mock_model, mock_scaler)
+
 
         input_data = {
             "monthly_income": 5000,
