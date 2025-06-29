@@ -1,7 +1,9 @@
 import pytest
 from flask import Flask,request,jsonify
-from api.services import services
-
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from api.services.services import get_risk
 
 @pytest.fixture
 def client():
@@ -11,7 +13,7 @@ def client():
     @app.route('/predict', methods=['POST'])
     def predict_route():
         data = request.get_json()
-        result = services.get_risk(data)
+        result = get_risk(data)
         return jsonify({"prediction":int(result)})
     with app.test_client() as client:
         yield client
