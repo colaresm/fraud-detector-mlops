@@ -4,6 +4,7 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from api.services.services import get_risk
+import numpy as np
 
 @pytest.fixture
 def client():
