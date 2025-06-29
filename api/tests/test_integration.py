@@ -1,6 +1,6 @@
 import pytest
 from flask import Flask,request,jsonify
-from api.services import services
+from services import services
 
 
 @pytest.fixture
