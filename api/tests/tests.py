@@ -1,7 +1,9 @@
+
 import unittest
-import numpy as np
 from unittest.mock import patch, MagicMock
+from api.services import services
 from api.services import services,app
+
 
 class TestSoma(unittest.TestCase):
     def test_soma_positiva(self):
@@ -17,7 +19,7 @@ class TestSoma(unittest.TestCase):
 class TestGetRisk(unittest.TestCase):
     @patch('api.infra.mlflow_server')
     @patch('api.utils.utils')
-    def test_get_risk_returns_expected_prediction(self, mock_get_params, mock_load_model_and_scaler):
+    def test_get_risk_returns_expected_prediction(self, mock_load_model_and_scaler, mock_get_params):
         mock_get_params.return_value = [5000, 700, 1000, 2]
 
         mock_scaler = MagicMock()
