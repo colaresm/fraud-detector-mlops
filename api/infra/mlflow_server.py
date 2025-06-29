@@ -14,7 +14,7 @@ def load_model_and_scaler(model_name="risk_model", scaler_name="scaler_risk", tr
     
     return model, scaler
 
-def is_mlflow_online(tracking_uri):
+def is_mlflow_online(tracking_uri="http://localhost:5000"):
     try:
         mlflow.set_tracking_uri(tracking_uri)
         client = MlflowClient()
