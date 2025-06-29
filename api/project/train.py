@@ -32,6 +32,6 @@ with mlflow.start_run() as run:
     mlflow.log_metric("acc_test", acc)
 
     mlflow.sklearn.log_model(scaler, "iris_model")
-    joblib.dump(scaler, "models/scaler_model.pkl")
-    joblib.dump(model, "models/mlp_model_iris.pkl")
+    joblib.dump(scaler, "api/models/scaler_model.pkl")
+    joblib.dump(model, "api/models/mlp_model_iris.pkl")
 
