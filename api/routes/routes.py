@@ -9,8 +9,9 @@ def predict():
         return jsonify({'error': 'Request must be JSON'}), 400
     
     data = request.get_json()
-    prediction = services.get_risk(data)
-    return jsonify({'prediction':prediction,}), 200
+    prediction = services.get_risk(data)[0]
+    
+    return jsonify({'prediction':int(prediction)}), 200
 
 @main.route('/healthy')
 def healthy():
