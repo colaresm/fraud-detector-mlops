@@ -25,7 +25,7 @@ class TestGetRisk(unittest.TestCase):
 
         mock_get_params.return_value = [5.1, 3.5, 1.4, 0.2]
         mock_scaler.transform.return_value = [[0.1, 0.2, 0.3, 0.4]]
-        mock_model.predict.return_value = ['setosas']
+        mock_model.predict.return_value = ['setosa']
 
         mock_load_model_and_scaler.return_value = (mock_model, mock_scaler)
 
