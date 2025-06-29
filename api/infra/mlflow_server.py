@@ -18,7 +18,7 @@ def is_mlflow_online(tracking_uri="http://localhost:5000"):
     try:
         mlflow.set_tracking_uri(tracking_uri)
         client = MlflowClient()
-        client.list_experiments()
+        client.search_experiments()
         return True
     except Exception as e:
         print(f"Erro ao conectar ao MLflow: {e}")
