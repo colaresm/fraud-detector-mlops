@@ -12,7 +12,7 @@ def client():
     def predict_route():
         data = request.get_json()
         result = services.get_risk(data)
-        return jsonify({"prediction":result})
+        return jsonify({"prediction":int(result)})
     with app.test_client() as client:
         yield client
 
