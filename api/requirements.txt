@@ -2,3 +2,4 @@ mlflow
 Flask
 pytest
 pytest-cov
+pandas

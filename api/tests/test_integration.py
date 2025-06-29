@@ -9,7 +9,6 @@ def client():
     app.config['TESTING'] = True
 
     @app.route('/predict', methods=['POST'])
-
     def predict_route():
         data = request.get_json()
         result = services.get_risk(data)
