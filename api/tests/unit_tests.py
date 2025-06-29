@@ -26,7 +26,7 @@ class TestGetRisk(unittest.TestCase):
             "petal_width": 0.2
         }
 
-        result = services.get_risk(input_data)
+        result = services.get_prediction(input_data)
 
         self.assertEqual(result, ['setosa'])
         mock_get_params.assert_called_once_with(input_data)
