@@ -24,7 +24,7 @@ X_test_scaled = scaler.transform(X_test)
 with mlflow.start_run() as run:
     mlflow.sklearn.autolog()
 
-    model = MLPClassifier(hidden_layer_sizes=(20,), max_iter=400, random_state=42)
+    model = MLPClassifier(hidden_layer_sizes=(150,), max_iter=400, random_state=42)
     model.fit(X_train_scaled, y_train)
 
     y_pred = model.predict(X_test_scaled)

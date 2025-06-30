@@ -1,7 +1,7 @@
-FROM python:3.11-alpine AS builder
+FROM python:3.11 AS builder
 
-RUN apk add --no-cache build-base
-
+RUN apt-get update && apt-get install -y build-essential \
+    && rm -rf /var/lib/apt/lists/
 WORKDIR /app
 
 COPY api/requirements.txt .
@@ -9,7 +9,7 @@ COPY api/requirements.txt .
 RUN pip install --upgrade pip \
     && pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
 
-FROM python:3.11-alpine
+FROM python:3.11-slim
 
 WORKDIR /app
 
@@ -19,7 +19,8 @@ COPY --from=builder /app/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
 COPY main.py .
-COPY api/ .
+COPY .env .env
+COPY api /app/api
 
 EXPOSE 3000
 

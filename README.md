@@ -2,6 +2,10 @@
 
 **IrisFlowAPI** is a complete machine learning project focused on classifying Iris flowers (Setosa, Versicolor, Virginica). It integrates the entire MLOps pipeline — from model training and experiment tracking to serving predictions through a production-ready API.
 
+
+![](static/screen.png)
+![](static/meth.png)
+
 ## 🔍 Project Overview
 
 This project trains a supervised learning model on the classic Iris dataset. The model is managed and tracked using **MLflow**, ensuring reproducibility and experiment versioning. Once trained, the model is served via a RESTful API built with **Flask**, allowing external applications to send requests and receive predictions.
@@ -46,6 +50,8 @@ The following response will be returned:
 }
 ```
 The Swagger is available in ``/apidocs``.
+
+# For Future Work
 
 # Contributing
 
