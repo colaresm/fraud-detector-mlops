@@ -4,7 +4,7 @@
 
 
 ![mlflow](static/screen.png)
-![flow](static/meth.png)
+![flow](static/flow.png)
 
 ## 🔍 Project Overview
 
