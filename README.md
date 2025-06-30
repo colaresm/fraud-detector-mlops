@@ -28,6 +28,25 @@ This project trains a supervised learning model on the classic Iris dataset. The
 ```bash
 docker-compose up --build
 ```
+* The MLflow server will be on port ``5000`` and the API on port ``3000``. To perform a prediction send a POST with the following body to ``/predict``:
+
+```
+{
+  "sepal_length": 5.1,
+  "sepal_width": 3.5,
+  "petal_length": 1.4,
+  "petal_width": 0.2
+}
+```
+The following response will be returned:
+```
+{
+  "prediction": "setosa",
+  "proba_max": 0.97
+}
+```
+The Swagger is available in ``/apidocs``.
+
 # Contributing
 
 1. Fork the repository.
