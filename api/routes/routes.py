@@ -9,7 +9,7 @@ def predict():
         return jsonify({'error': 'Request must be JSON'}), 400
     
     data = request.get_json()
-    response = services.get_risk(data)
+    response = services.get_prediction(data)
 
     prediction, proba = response[0], response[1]
     proba_max = float(np.max(proba))
