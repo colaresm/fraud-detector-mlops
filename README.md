@@ -52,6 +52,11 @@ The following response will be returned:
 The Swagger is available in ``/apidocs``.
 
 # For Future Work
+- Consume models directly from MLflow;
+
+- Use asynchronous processing for training;
+
+- Add a persistent volume to the MLflow container.
 
 # Contributing
 
