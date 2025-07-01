@@ -8,7 +8,7 @@ import mlflow
 import mlflow.sklearn
 import joblib
 
-mlflow.set_tracking_uri("http://localhost:5000/")
+mlflow.set_tracking_uri("http://mlflow_server:5000/")
 mlflow.set_experiment("Iris Classification")
 
 iris = load_iris()
