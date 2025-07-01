@@ -65,7 +65,6 @@ The Swagger is available in ``/apidocs``.
 3. Commit your changes (`git commit -am 'Add new feature'`).
 4. Push to the branch (`git push origin feature/new-feature`).
 5. Open a pull request.
-
 # Contact
 
 - **LinkedIn**: [engmarcelocolares](https://www.linkedin.com/in/engmarcelocolares/)
